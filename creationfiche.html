@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RITTER Companie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css\creationfiche.css">
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <h2>RITTER Companie</h2>
+            <p>Ambulance</p>
+        </div>
+        <ul class="nav-links">
+            <li><a href="acceuil.html">
+                <i class="fas fa-home"></i>
+                Accueil
+            </a></li>
+            <li><a href="creationfiche.html" class="active">
+                <i class="fas fa-file-medical"></i>
+                Création Fiche Médicale
+            </a></li>
+            <li><a href="fichemedical.html">
+                <i class="fas fa-folder-open"></i>
+                Fiche Médicale
+            </a></li>
+        </ul>
+    </nav>
+
+    <!-- Contenu principal -->
+    <main class="content">
+        <div class="medical-header glass-effect">
+            <h1>
+                <i class="fas fa-file-medical"></i>
+                Création de Fiche Médicale
+            </h1>
+            <div class="nav-tabs">
+                <button class="tab-btn" data-tab="victime">
+                    <i class="fas fa-user"></i>
+                    Information Victime
+                </button>
+                <button class="tab-btn" data-tab="medical">
+                    <i class="fas fa-heartbeat"></i>
+                    Information Médicale
+                </button>
+                <button class="tab-btn" data-tab="complementaire">
+                    <i class="fas fa-plus-circle"></i>
+                    Information Complémentaire
+                </button>
+                <button class="tab-btn" data-tab="divers">
+                    <i class="fas fa-clipboard-list"></i>
+                    Divers
+                </button>
+                <button type="button" class="tab-btn" data-tab="bilan">
+                    <i class="fas fa-clipboard-check"></i>
+                    Bilan
+                </button>
+            </div>
+        </div>
+
+        <div class="form-container glass-effect">
+            <form id="medical-form">
+                <!-- Onglet Information Victime -->
+                <div class="tab-content active" id="victime">
+                    <div class="circonstanciel-header glass-effect">
+                        <i class="fas fa-user"></i>
+                        <h2>Information Victime</h2>
+                    </div>
+                    <div class="form-group">
+                        <label for="nom">Nom/Prénom</label>
+                        <input type="text" id="nom" class="form-control" name="nom">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="age">Âge</label>
+                            <input type="number" id="age" class="form-control" name="age">
+                        </div>
+                        <div class="form-group">
+                            <label for="poids">Poids (kg)</label>
+                            <input type="number" id="poids" class="form-control" name="poids">
+                        </div>
+                        <div class="form-group">
+                            <label for="taille">Taille (cm)</label>
+                            <input type="number" id="taille" class="form-control" name="taille">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="infoDivers">Information Divers</label>
+                        <textarea id="infoDivers" class="form-control" name="infoDivers"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="next-btn" onclick="nextTab('medical')">
+                            Suivant <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Onglet Information Médicale -->
+                <div class="tab-content" id="medical">
+                    <div class="circonstanciel-header glass-effect">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h2>Circonstanciel</h2>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group glass-effect">
+                            <label for="natureIntervention">Nature de l'intervention</label>
+                            <div class="nature-intervention-container">
+                                <select 
+                                    class="nature-select form-control" 
+                                    id="natureIntervention" 
+                                    name="natureIntervention"
+                                >
+                                    <option value="" disabled selected>Sélectionner la nature</option>
+                                    <option value="accident">Accident de la route</option>
+                                    <option value="malaise">Malaise</option>
+                                    <option value="chute">Chute</option>
+                                    <option value="traumatisme">Traumatisme</option>
+                                    <option value="douleur">Douleur</option>
+                                    <option value="intoxication">Intoxication</option>
+                                    <option value="brulure">Brûlure</option>
+                                    <option value="hemorragie">Hémorragie</option>
+                                    <option value="accouchement">Accouchement</option>
+                                    <option value="psychiatrique">Problème psychiatrique</option>
+                                </select>
+                                <button 
+                                    type="button" 
+                                    class="add-nature-btn" 
+                                    id="addNatureBtn"
+                                    aria-label="Ajouter une nature d'intervention"
+                                >
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group glass-effect">
+                            <label for="dateIntervention">Date de l'intervention</label>
+                            <input type="datetime-local" id="dateIntervention" name="dateIntervention" class="form-control">
+                        </div>
+                        
+                        <div class="form-group glass-effect">
+                            <label for="lieuIntervention">Lieu d'intervention</label>
+                            <input type="text" id="lieuIntervention" name="lieuIntervention" class="form-control" placeholder="Adresse de l'intervention">
+                        </div>
+                    </div>
+
+                    <div class="moyens-section glass-effect">
+                        <label>Moyens engagés</label>
+                        <div class="moyens-grid">
+                            <button type="button" class="moyen-btn">
+                                <i class="fas fa-ambulance"></i>
+                                ASSU
+                            </button>
+                            <button type="button" class="moyen-btn">
+                                <i class="fas fa-shield-alt"></i>
+                                Sécurité
+                            </button>
+                            <button type="button" class="moyen-btn">
+                                <i class="fas fa-road"></i>
+                                DIR
+                            </button>
+                            <button type="button" class="moyen-btn">
+                                <i class="fas fa-wrench"></i>
+                                Dépanneur
+                            </button>
+                            <button type="button" class="moyen-btn">
+                                <i class="fas fa-car-crash"></i>
+                                Police
+                            </button>
+                            <button type="button" class="moyen-btn">
+                                <i class="fas fa-fire"></i>
+                                Pompier
+                            </button>
+                            <button type="button" class="moyen-btn">
+                                <i class="fas fa-hospital"></i>
+                                SMUR
+                            </button>
+                            <button type="button" class="moyen-btn">
+                                <i class="fas fa-plus-square"></i>
+                                SSSM
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Nouvelle section Urgence Vitale -->
+                    <div class="vital-signs glass-effect">
+                        <div class="circonstanciel-header glass-effect">
+                            <i class="fas fa-heartbeat"></i>
+                            <h2>Urgence Vitale</h2>
+                        </div>
+
+                        <div class="vital-grid">
+                            <!-- Conscience -->
+                            <div class="vital-section">
+                                <div class="vital-header">
+                                    <i class="fas fa-brain"></i>
+                                    <span>Conscience</span>
+                                </div>
+                                <div class="vital-content">
+                                    <div class="vital-item">
+                                        <span>Ouverture yeux</span>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn-toggle">Oui</button>
+                                            <button type="button" class="btn-toggle">Non</button>
+                                        </div>
+                                    </div>
+<!-- ... existing code ... -->
+                                    <div class="vital-item">
+                                        <span>Orientation</span>
+                                        <div class="btn-group">
+                                            <div class="vital-item">
+                                                <span>Temps</span>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn-toggle">Oui</button>
+                                                    <button type="button" class="btn-toggle">Non</button>
+                                                </div>
+                                            </div>
+                                            <div class="vital-item">
+                                                <span>Espace</span>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn-toggle">Oui</button>
+                                                    <button type="button" class="btn-toggle">Non</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+<!-- ... existing code ... -->
+                                    <div class="vital-item">
+                                        <span>Perte de Connaissance Initial</span>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn-toggle">Oui</button>
+                                            <button type="button" class="btn-toggle">Non</button>
+                                        </div>
+                                    </div>
+                                    <div class="vital-item">
+                                        <span>Pupilles Symétriques</span>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn-toggle">Oui</button>
+                                            <button type="button" class="btn-toggle">Non</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Circulatoire -->
+                            <div class="vital-section">
+                                <div class="vital-header">
+                                    <i class="fas fa-heartbeat"></i>
+                                    <span>Circulatoire</span>
+                                </div>
+                                <div class="vital-content">
+                                    <div class="vital-item">
+                                        <label for="bpm">Battement Par Minutes</label>
+                                        <input type="text" id="bpm" name="bpm" class="vital-input">
+                                    </div>
+                                    <div class="vital-item">
+                                        <span>Rythme</span>
+                                        <input type="text" class="vital-input">
+                                    </div>
+                                    <div class="vital-item">
+                                        <span>Régulier</span>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn-toggle">Oui</button>
+                                            <button type="button" class="btn-toggle">Non</button>
+                                        </div>
+                                    </div>
+                                    <div class="vital-item">
+                                        <span>Bien frappé</span>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn-toggle">Oui</button>
+                                            <button type="button" class="btn-toggle">Non</button>
+                                        </div>
+                                    </div>
+                                    <div class="vital-item">
+                                        <span>Symétrique</span>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn-toggle">Oui</button>
+                                            <button type="button" class="btn-toggle">Non</button>
+                                        </div>
+                                    </div>
+                                    <div class="vital-item">
+                                        <span>Tension Artérielle</span>
+                                        <input type="text" class="vital-input" placeholder="Ex: 12/8">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vital-grid">
+                            <!-- Ventilation -->
+                            <div class="vital-section">
+                                <div class="vital-header">
+                                    <i class="fas fa-lungs"></i>
+                                    <span>Ventilation</span>
+                                </div>
+                                <div class="vital-content">
+                                    <div class="vital-item">
+                                        <span>Fréquence Respiratoire</span>
+                                        <input type="text" class="vital-input">
+                                    </div>
+                                    <div class="vital-item">
+                                        <span>Saturation</span>
+                                        <input type="text" class="vital-input">
+                                    </div>
+                                    <div class="vital-item">
+                                        <span>Ample</span>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn-toggle">Oui</button>
+                                            <button type="button" class="btn-toggle">Non</button>
+                                        </div>
+                                    </div>
+                                    <div class="vital-item">
+                                        <span>Régulière</span>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn-toggle">Oui</button>
+                                            <button type="button" class="btn-toggle">Non</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Urgences Critiques -->
+                            <div class="vital-section">
+                                <div class="vital-header">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Urgences Critiques</span>
+                                </div>
+                                <div class="vital-content">
+                                    <div class="vital-item">
+                                        <span>ACR</span>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn-toggle">Oui</button>
+                                            <button type="button" class="btn-toggle">Non</button>
+                                        </div>
+                                    </div>
+                                    <div class="vital-item">
+                                        <span>Hémorragie</span>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn-toggle">Oui</button>
+                                            <button type="button" class="btn-toggle">Non</button>
+                                        </div>
+                                    </div>
+                                    <div class="vital-item">
+                                        <span>Inconscience</span>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn-toggle">Oui</button>
+                                            <button type="button" class="btn-toggle">Non</button>
+                                        </div>
+                                    </div>
+                                    <div class="vital-item">
+                                        <span>Démembration</span>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn-toggle">Oui</button>
+                                            <button type="button" class="btn-toggle">Non</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="next-btn" onclick="nextTab('complementaire')">
+                            Suivant <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Dans l'onglet Information Complémentaire -->
+                <div class="tab-content" id="complementaire">
+                    <div class="circonstanciel-header glass-effect">
+                        <i class="fas fa-plus-circle"></i>
+                        <h2>Informations Complémentaires</h2>
+                    </div>
+
+                    <div class="form-section glass-effect">
+                        <div class="section-header">
+                            <i class="fas fa-notes-medical"></i>
+                            <h2>Plaintes & douleurs exprimées</h2>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="plaintes" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-section glass-effect">
+                        <div class="section-header">
+                            <i class="fas fa-first-aid"></i>
+                            <h2>Gestes d'urgence</h2>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="gestesUrgence" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group glass-effect">
+                            <label>Maladie</label>
+                            <div class="select-container">
+                                <select id="maladieSelect" class="form-control">
+                                    <option value="" disabled selected>Sélectionner une maladie</option>
+                                    <option value="aucune">Aucune</option>
+                                    <option value="diabete">Diabète</option>
+                                    <option value="hypertension">Hypertension</option>
+                                    <option value="asthme">Asthme</option>
+                                    <option value="epilepsie">Épilepsie</option>
+                                </select>
+                                <button type="button" class="add-btn" id="addMaladieBtn">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group glass-effect">
+                            <label>Hospitalisation</label>
+                            <input type="text" id="hospitalisation" class="form-control">
+                        </div>
+
+                        <div class="form-group glass-effect">
+                            <label>Traitements</label>
+                            <input type="text" id="traitements" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group glass-effect">
+                        <label>Allergies</label>
+                        <div class="select-container">
+                            <select id="allergieSelect" class="form-control">
+                                <option value="" disabled selected>Sélectionner une allergie</option>
+                                <option value="aucune">Aucune</option>
+                                <option value="penicilline">Pénicilline</option>
+                                <option value="latex">Latex</option>
+                                <option value="pollen">Pollen</option>
+                                <option value="arachides">Arachides</option>
+                            </select>
+                            <button type="button" class="add-btn" id="addAllergieBtn">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="next-btn" onclick="nextTab('divers')">
+                            Suivant <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Ajouter le nouvel onglet Divers -->
+                <div class="tab-content" id="divers">
+                    <div class="circonstanciel-header glass-effect">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h2>Divers</h2>
+                    </div>
+                    <div class="form-section glass-effect">
+                        <!-- Devenir du patient -->
+                        <div class="form-group">
+                            <label>Devenir</label>
+                            <div class="devenir-options">
+                                <button type="button" class="devenir-btn">Transport C.H.</button>
+                                <button type="button" class="devenir-btn">Laisser sur Place</button>
+                                <button type="button" class="devenir-btn">Refus de Soin</button>
+                                <button type="button" class="devenir-btn">Fuite</button>
+                            </div>
+                        </div>
+
+                        <!-- Type d'évacuation -->
+                        <div class="form-group">
+                            <label>Type d'évacuation</label>
+                            <select class="form-control">
+                                <option value="" disabled selected>Sélectionner le type d'évacuation</option>
+                                <option value="assu-ritter">ASSU Ritter</option>
+                                <option value="assu">ASSU</option>
+                                <option value="pompier">Pompier</option>
+                                <option value="samu">SAMU</option>
+                            </select>
+                        </div>
+
+                        <!-- CH AFFECTATION -->
+                        <div class="form-group">
+                            <label>CH AFFECTATION</label>
+                            <div class="ch-affectation">
+                                <h3>CH AFFECTATION</h3>
+                                <div class="ch-buttons">
+                                    <button class="ch-btn">
+                                        <i class="fas fa-fire"></i>
+                                        <div>
+                                            <strong>Lakeside</strong>
+                                            <span>Centre de grand brûlé</span>
+                                        </div>
+                                    </button>
+
+                                    <button class="ch-btn">
+                                        <i class="fas fa-brain"></i>
+                                        <div>
+                                            <strong>Watergate</strong>
+                                            <span>Hôpital Psy, centre de pneumologie, noyé / centre médico légal</span>
+                                        </div>
+                                    </button>
+
+                                    <button class="ch-btn">
+                                        <i class="fas fa-procedures"></i>
+                                        <div>
+                                            <strong>Fall Church</strong>
+                                            <span>Centre secondaire (douleur à 6 ou -)</span>
+                                        </div>
+                                    </button>
+
+                                    <button class="ch-btn">
+                                        <i class="fas fa-hospital"></i>
+                                        <div>
+                                            <strong>Jamestown</strong>
+                                            <span>Centre principal (douleur à 7 et +)</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Témoin et médecin -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="temoin">Témoin ou personne à prévenir</label>
+                                <input type="text" id="temoin" name="temoin" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="medecin">Vu par médecin</label>
+                                <input type="text" id="medecin" name="medecin" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-submit">
+                        <button type="button" class="create-btn">
+                            <i class="fas fa-file-medical"></i>
+                            Créer la fiche médicale
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Ajouter cette nouvelle section après la div "divers" -->
+                <div class="tab-content" id="bilan">
+                    <div class="circonstanciel-header glass-effect">
+                        <i class="fas fa-clipboard-check"></i>
+                        <h2>Bilan Automatique</h2>
+                    </div>
+
+                    <div class="form-section glass-effect">
+                        <div class="bilan-container">
+                            <div class="bilan-header">
+                                <h3>Bilan à copier</h3>
+                                <button type="button" class="copy-btn" onclick="copyBilan(event)">
+                                    <i class="fas fa-copy"></i>
+                                    Copier le bilan
+                                </button>
+                            </div>
+                            
+                            <div class="bilan-content">
+                                <pre id="bilanText" class="bilan-text"></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- La modal -->
+    <div class="modal" id="addNatureModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ajouter une nature d'intervention</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="form-group">
+                <label for="newNatureInput">Nouvelle nature</label>
+                <input type="text" class="form-control" id="newNatureInput">
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn cancel">Annuler</button>
+                <button class="modal-btn add">Ajouter</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour ajouter une maladie -->
+    <div class="modal" id="addMaladieModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ajouter une maladie</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="form-group">
+                <label for="newMaladieInput">Nouvelle maladie</label>
+                <input type="text" class="form-control" id="newMaladieInput">
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn cancel">Annuler</button>
+                <button class="modal-btn add">Ajouter</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour ajouter une allergie -->
+    <div class="modal" id="addAllergieModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ajouter une allergie</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="form-group">
+                <label for="newAllergieInput">Nouvelle allergie</label>
+                <input type="text" class="form-control" id="newAllergieInput">
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn cancel">Annuler</button>
+                <button class="modal-btn add">Ajouter</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ajoutez la balise script ici, juste avant la fermeture du body -->
+    <script src="script.js"></script>
+</body>
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Empêcher la soumission du formulaire par défaut
+    document.getElementById('medical-form')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+    });
+
+    // Modifier la gestion des boutons
+    document.querySelectorAll('.btn-toggle, .devenir-btn, .ch-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault(); // Empêcher le comportement par défaut
+            
+            // Pour les boutons toggle
+            if (this.classList.contains('btn-toggle')) {
+                const group = this.closest('.btn-group');
+                group.querySelectorAll('.btn-toggle').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+            }
+            
+            this.classList.toggle('active');
+            generateBilan(); // Mettre à jour le bilan
+        });
+    });
+
+    // Modifier la fonction de changement d'onglet
+    function switchTab(tabName) {
+        event.preventDefault(); // Empêcher le comportement par défaut
+        
+        // Masquer tous les onglets
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        
+        // Afficher l'onglet sélectionné
+        document.getElementById(tabName).classList.add('active');
+        
+        // Mettre à jour les boutons de navigation
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+
+        // Générer le bilan si on est sur l'onglet bilan
+        if (tabName === 'bilan') {
+            generateBilan();
+        }
+    }
+
+    // Modifier la gestion des onglets
+    document.querySelectorAll('.tab-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const tabId = this.getAttribute('data-tab');
+            switchTab(tabId);
+        });
+    });
+
+    // Modifier la fonction de copie du bilan
+    function copyBilan(e) {
+        e?.preventDefault(); // Empêcher le comportement par défaut si l'événement existe
+        const bilanText = document.getElementById('bilanText').textContent;
+        navigator.clipboard.writeText(bilanText).then(() => {
+            const copyBtn = document.querySelector('.copy-btn');
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copié !';
+            setTimeout(() => {
+                copyBtn.innerHTML = originalText;
+            }, 2000);
+        });
+    }
+
+    // Ajouter type="button" à tous les boutons pour éviter la soumission du formulaire
+    document.querySelectorAll('button').forEach(button => {
+        if (!button.type) {
+            button.type = 'button';
+        }
+    });
+
+    // Récupérer les éléments
+    const addBtn = document.getElementById('addNatureBtn');
+    const modal = document.getElementById('addNatureModal');
+    const closeBtn = document.querySelector('.close-modal');
+    const cancelBtn = document.querySelector('.modal-btn.cancel');
+    const addNatureBtn = document.querySelector('.modal-btn.add');
+    
+    // Ouvrir la modal
+    addBtn.addEventListener('click', () => {
+        modal.style.display = 'block';
+    });
+    
+    // Fermer la modal (X)
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    
+    // Fermer la modal (Annuler)
+    cancelBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    
+    // Ajouter nouvelle nature
+    addNatureBtn.addEventListener('click', () => {
+        const input = document.getElementById('newNatureInput');
+        const newNature = input.value.trim();
+        
+        if (newNature) {
+            const select = document.getElementById('natureIntervention');
+            const option = document.createElement('option');
+            option.value = newNature.toLowerCase();
+            option.textContent = newNature;
+            select.appendChild(option);
+            select.value = option.value;
+            input.value = '';
+            modal.style.display = 'none';
+        }
+    });
+    
+    // Fermer en cliquant en dehors
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    // Gestion des onglets
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Retirer la classe active de tous les boutons
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            // Ajouter la classe active au bouton cliqué
+            button.classList.add('active');
+            
+            // Masquer tous les contenus
+            tabContents.forEach(content => content.classList.remove('active'));
+            // Afficher le contenu correspondant
+            const tabId = button.getAttribute('data-tab');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+
+    // Fonction pour le bouton suivant
+    window.nextTab = function(tabId) {
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        const nextButton = document.querySelector(`[data-tab="${tabId}"]`);
+        nextButton.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+    }
+
+    // Gestion des boutons toggle
+    const toggleButtons = document.querySelectorAll('.btn-toggle');
+    
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Désactive les autres boutons du même groupe
+            const group = this.closest('.btn-group');
+            group.querySelectorAll('.btn-toggle').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Active le bouton cliqué
+            this.classList.add('active');
+            
+            // Sauvegarde la valeur
+            const value = this.textContent.toLowerCase();
+            const itemName = this.closest('.vital-item').querySelector('.item-label span').textContent;
+            console.log(`${itemName}: ${value}`);
+            
+            // Ici vous pouvez ajouter votre logique pour sauvegarder les données
+        });
+    });
+
+    // Gestion des inputs
+    const inputs = document.querySelectorAll('.vital-input');
+    
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            const value = this.value;
+            const itemName = this.closest('.vital-item').querySelector('.item-label span').textContent;
+            console.log(`${itemName}: ${value}`);
+            
+            // Ici vous pouvez ajouter votre logique pour sauvegarder les données
+        });
+    });
+
+    const moyenBtns = document.querySelectorAll('.moyen-btn');
+    
+    moyenBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.classList.toggle('active');
+        });
+    });
+
+    // Gestion des modales pour les maladies et allergies
+    function setupModal(buttonId, modalId, selectId, inputId) {
+        const addBtn = document.getElementById(buttonId);
+        const modal = document.getElementById(modalId);
+        const closeBtn = modal.querySelector('.close-modal');
+        const cancelBtn = modal.querySelector('.modal-btn.cancel');
+        const addItemBtn = modal.querySelector('.modal-btn.add');
+        const select = document.getElementById(selectId);
+        const input = document.getElementById(inputId);
+
+        addBtn.addEventListener('click', () => {
+            modal.style.display = 'block';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            input.value = '';
+        });
+
+        cancelBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            input.value = '';
+        });
+
+        addItemBtn.addEventListener('click', () => {
+            const newItem = input.value.trim();
+            if (newItem) {
+                const option = document.createElement('option');
+                option.value = newItem.toLowerCase();
+                option.textContent = newItem;
+                // Insérer après l'option "Aucune"
+                select.insertBefore(option, select.children[2]);
+                select.value = option.value;
+                input.value = '';
+                modal.style.display = 'none';
+            }
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                input.value = '';
+            }
+        });
+    }
+
+    // Initialiser les modales
+    setupModal('addMaladieBtn', 'addMaladieModal', 'maladieSelect', 'newMaladieInput');
+    setupModal('addAllergieBtn', 'addAllergieModal', 'allergieSelect', 'newAllergieInput');
+
+    // Ajouter dans le DOMContentLoaded existant
+    document.querySelectorAll('.devenir-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Désactive tous les boutons du même groupe
+            const group = this.closest('.devenir-options');
+            group.querySelectorAll('.devenir-btn').forEach(b => b.classList.remove('active'));
+            // Active le bouton cliqué
+            this.classList.add('active');
+        });
+    });
+
+    // Ajouter au JavaScript existant
+    document.querySelectorAll('.ch-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Désactive tous les boutons du groupe
+            const group = this.closest('.ch-buttons');
+            group.querySelectorAll('.ch-btn').forEach(b => b.classList.remove('active'));
+            // Active le bouton cliqué
+            this.classList.add('active');
+        });
+    });
+
+    // Ajouter ces écouteurs d'événements pour mettre à jour le bilan
+    document.addEventListener('DOMContentLoaded', function() {
+        // Mettre à jour sur tous les changements d'inputs
+        document.querySelectorAll('input, textarea, select').forEach(element => {
+            element.addEventListener('input', generateBilan);
+            element.addEventListener('change', generateBilan);
+        });
+
+        // Mettre à jour sur tous les clics de boutons
+        document.querySelectorAll('.btn-toggle, .devenir-btn, .ch-btn, .moyen-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Gestion des boutons toggle
+                if (this.classList.contains('btn-toggle')) {
+                    const group = this.closest('.btn-group');
+                    if (group) {
+                        group.querySelectorAll('.btn-toggle').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                    }
+                }
+                
+                // Gestion des boutons devenir
+                if (this.classList.contains('devenir-btn')) {
+                    const group = this.closest('.devenir-options');
+                    if (group) {
+                        group.querySelectorAll('.devenir-btn').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                    }
+                }
+                
+                // Gestion des boutons CH
+                if (this.classList.contains('ch-btn')) {
+                    const group = this.closest('.ch-buttons');
+                    if (group) {
+                        group.querySelectorAll('.ch-btn').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                    }
+                }
+                
+                this.classList.toggle('active');
+                generateBilan();
+            });
+        });
+
+        // Mettre à jour quand on change d'onglet
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const tabId = this.getAttribute('data-tab');
+                
+                // Changer d'onglet
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                document.getElementById(tabId)?.classList.add('active');
+                
+                // Mettre à jour les boutons de navigation
+                document.querySelectorAll('.tab-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Générer le bilan
+                generateBilan();
+            });
+        });
+
+        // Générer le bilan initial
+        generateBilan();
+    });
+
+    // Mettre à jour la fonction generateBilan pour inclure toutes les données
+    function generateBilan() {
+        // Information Victime
+        const nom = document.getElementById('nom')?.value || 'Non renseigné';
+        const prenom = document.getElementById('prenom')?.value || '';
+        const age = document.getElementById('age')?.value || 'Non renseigné';
+        const poids = document.getElementById('poids')?.value || 'Non renseigné';
+        const taille = document.getElementById('taille')?.value || 'Non renseigné';
+        const infoDivers = document.getElementById('infoDivers')?.value || 'Aucune';
+
+        // Informations Complémentaires
+        const plaintes = document.getElementById('plaintes')?.value || 'Aucune';
+        const gestesUrgence = document.getElementById('gestesUrgence')?.value || 'Aucun';
+        const maladie = document.getElementById('maladieSelect')?.value || 'Aucune';
+        const hospitalisation = document.getElementById('hospitalisation')?.value || 'Non renseigné';
+        const traitements = document.getElementById('traitements')?.value || 'Aucun';
+        const allergies = document.getElementById('allergieSelect')?.value || 'Aucune';
+
+        // Générer le texte du bilan
+        const bilanText = `BILAN MEDICAL
+
+INFORMATIONS PATIENT
+------------------
+Nom/Prénom: ${nom} ${prenom}
+Age: ${age} ans
+Poids: ${poids} kg
+Taille: ${taille} cm
+Informations diverses: ${infoDivers}
+
+INFORMATIONS COMPLEMENTAIRES
+--------------------------
+Plaintes et douleurs: ${plaintes}
+Gestes d'urgence effectués: ${gestesUrgence}
+Maladie(s): ${maladie}
+Antécédents d'hospitalisation: ${hospitalisation}
+Traitements en cours: ${traitements}
+Allergies: ${allergies}`;
+
+        // Mettre à jour le contenu
+        document.getElementById('bilanText').textContent = bilanText;
+    }
+
+    // Ajouter une fonction pour formater les valeurs vides
+    function formatValue(value) {
+        return value && value.trim() ? value.trim() : 'Non renseigné';
+    }
+
+    // Ajouter une fonction pour nettoyer le texte
+    function cleanText(text) {
+        return text.replace(/\s+/g, ' ').trim();
+    }
+});
+
+// Ajouter au script existant
+function submitForm() {
+    // Récupérer toutes les données du formulaire
+    const formData = {
+        // Information Victime
+        nom: document.getElementById('nom')?.value || '',
+        prenom: document.getElementById('prenom')?.value || '',
+        age: document.getElementById('age')?.value || '',
+        poids: document.getElementById('poids')?.value || '',
+        taille: document.getElementById('taille')?.value || '',
+        infoDivers: document.getElementById('infoDivers')?.value || '',
+
+        // Intervention
+        natureIntervention: document.getElementById('natureIntervention')?.value || '',
+        dateIntervention: document.querySelector('input[type="datetime-local"]')?.value || '',
+        lieuIntervention: document.querySelector('input[placeholder="Adresse de l\'intervention"]')?.value || '',
+        moyensEngages: Array.from(document.querySelectorAll('.moyen-btn.active')).map(btn => btn.textContent.trim()).join(', '),
+
+        // Conscience
+        conscienceYeux: document.querySelector('#conscience .vital-item:nth-child(1) .btn-toggle.active')?.textContent || '',
+        conscienceTemps: document.querySelector('#conscience .vital-item:nth-child(2) .btn-toggle.active')?.textContent || '',
+        conscienceEspace: document.querySelector('#conscience .vital-item:nth-child(3) .btn-toggle.active')?.textContent || '',
+        consciencePCI: document.querySelector('#conscience .vital-item:nth-child(4) .btn-toggle.active')?.textContent || '',
+        consciencePupilles: document.querySelector('#conscience .vital-item:nth-child(5) .btn-toggle.active')?.textContent || '',
+
+        // Circulatoire
+        circulatoireBPM: document.querySelector('#circulation input[placeholder="BPM"]')?.value || '',
+        circulatoireRythme: document.querySelector('#circulation .vital-item:nth-child(2) .btn-toggle.active')?.textContent || '',
+        circulatoireRegulier: document.querySelector('#circulation .vital-item:nth-child(3) .btn-toggle.active')?.textContent || '',
+        circulatoireFrappe: document.querySelector('#circulation .vital-item:nth-child(4) .btn-toggle.active')?.textContent || '',
+        circulatoireSymetrique: document.querySelector('#circulation .vital-item:nth-child(5) .btn-toggle.active')?.textContent || '',
+        circulatoireTension: document.querySelector('#circulation input[placeholder="TA"]')?.value || '',
+
+        // Ventilation
+        ventilationFR: document.querySelector('#ventilation input[placeholder="FR"]')?.value || '',
+        ventilationSaturation: document.querySelector('#ventilation input[placeholder="SpO2"]')?.value || '',
+        ventilationAmple: document.querySelector('#ventilation .vital-item:nth-child(3) .btn-toggle.active')?.textContent || '',
+        ventilationReguliere: document.querySelector('#ventilation .vital-item:nth-child(4) .btn-toggle.active')?.textContent || '',
+
+        // Urgences Critiques
+        urgencesACR: document.querySelector('.vital-section:last-child .vital-item:nth-child(1) .btn-toggle.active')?.textContent || 'Non',
+        urgencesHemorragie: document.querySelector('.vital-section:last-child .vital-item:nth-child(2) .btn-toggle.active')?.textContent || 'Non',
+        urgencesInconscience: document.querySelector('.vital-section:last-child .vital-item:nth-child(3) .btn-toggle.active')?.textContent || 'Non',
+        urgencesDemembration: document.querySelector('.vital-section:last-child .vital-item:nth-child(4) .btn-toggle.active')?.textContent || 'Non',
+
+        // Informations Complémentaires
+        plaintes: document.getElementById('plaintes')?.value || '',
+        gestesUrgence: document.getElementById('gestesUrgence')?.value || '',
+        maladie: document.getElementById('maladieSelect')?.value || '',
+        hospitalisation: document.getElementById('hospitalisation')?.value || '',
+        traitements: document.getElementById('traitements')?.value || '',
+        allergies: document.getElementById('allergieSelect')?.value || '',
+
+        // Devenir et Transport
+        devenir: document.querySelector('.devenir-btn.active')?.textContent || '',
+        typeEvacuation: document.querySelector('select option:checked')?.textContent || '',
+        chAffectation: document.querySelector('.ch-btn.active .ch-name')?.textContent || '',
+        temoin: document.querySelector('input[placeholder="Témoin ou personne à prévenir"]')?.value || '',
+        medecinVu: document.querySelector('input[placeholder="Vu par médecin"]')?.value || ''
+    };
+
+    // Afficher un message de chargement
+    const submitBtn = document.querySelector('.create-btn');
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+    submitBtn.disabled = true;
+
+    // Envoyer les données à Google Sheets
+    fetch('VOTRE_NOUVELLE_URL_DE_DEPLOIEMENT', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Succès
+        submitBtn.innerHTML = '<i class="fas fa-check"></i> Fiche créée !';
+        setTimeout(() => {
+            submitBtn.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+        }, 3000);
+    })
+    .catch(error => {
+        // Erreur
+        console.error('Erreur:', error);
+        submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Erreur !';
+        setTimeout(() => {
+            submitBtn.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+        }, 3000);
+    });
+}
+
+// Fonction helper pour récupérer les signes vitaux
+function getVitalSigns(section) {
+    const signs = {};
+    const sectionElement = document.querySelector(`#${section}`);
+    if (sectionElement) {
+        sectionElement.querySelectorAll('.vital-item').forEach(item => {
+            const label = item.querySelector('label').textContent;
+            const activeBtn = item.querySelector('.btn-toggle.active');
+            const input = item.querySelector('input');
+            signs[label] = activeBtn ? activeBtn.textContent : (input ? input.value : '');
+        });
+    }
+    return signs;
+}
+
+function copyBilan() {
+    const bilanText = document.getElementById('bilanText').textContent;
+    navigator.clipboard.writeText(bilanText).then(() => {
+        // Feedback visuel
+        const copyBtn = document.querySelector('.copy-btn');
+        const originalText = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copié !';
+        setTimeout(() => {
+            copyBtn.innerHTML = originalText;
+        }, 2000);
+    });
+}
+
+// Mettre à jour le bilan automatiquement quand on change d'onglet
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (btn.getAttribute('data-tab') === 'bilan') {
+            generateBilan();
+        }
+    });
+});
+
+// Mettre à jour le bilan quand on modifie des champs
+document.querySelectorAll('input, select, .btn-toggle, .devenir-btn, .ch-btn').forEach(element => {
+    element.addEventListener('change', generateBilan);
+    element.addEventListener('click', generateBilan);
+});
+
+</script>
